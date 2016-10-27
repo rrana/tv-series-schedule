@@ -19,17 +19,13 @@ def get_omdb_result(tv_series_name):
 
 def validate_omdb_result(api_response):
     if api_response.json()['Response'] == 'False':
-        print "Invalid name! Please check name again!"
+        print "Invalid name! Please check the name again!"
         return
     elif api_response.json()['Type'] != 'series':
         print "Not tv series. Found match for %s instead" % api_response.json()['Type']
         return
     else:
         return api_response
-
-def get_current_season(api_response):
-    current_season = api_response.json()['totalSeasons']
-    return current_season
 
 def date_in_imdb_format():
     now = datetime.now()
@@ -41,7 +37,6 @@ def date_in_imdb_format():
 
 def get_episode_information(args):
     #todo: suggest tv series name if no match found. Considering possibilites of spelling mistake
-    #todo: handle exception in case tv series name is invalid.
     tv_series_name = args.series_name.lower()
     omdb_result =  get_omdb_result(tv_series_name)
 
